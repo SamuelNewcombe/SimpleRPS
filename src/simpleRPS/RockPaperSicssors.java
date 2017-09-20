@@ -4,57 +4,31 @@ import java.sql.Time;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+import javax.swing.*;
+
 
 public class RockPaperSicssors {
 	
 	public static int yourScore = 0;
 	public static int computerScore = 0;
+	public static String userChoice = "";
+	public static String computerChoice;
+	public static String winner;
+	
+
 	
 	public static void main( String [] args) throws InterruptedException {
+		test();
+		GUIMakerClass myGUI = new GUIMakerClass();		
+		myGUI.createGUI();
+		
+	}
+	
+	public static void test() {
 		Random random = new Random();
-		Scanner scanner = new Scanner( System.in);
-		String computerChoice;
-		String userChoice;
-		String winner;
-		
 		computerChoice = generateComputerChoice(random);
-		showMenu();
-		userChoice = getUserChoice(scanner);
-		System.out.println("Your Choice: " + userChoice + "\nComputer chose: " + computerChoice);
-		winner = winner(computerChoice, userChoice);
-		if(winner.equalsIgnoreCase("computer")) {
-			System.out.println("You lose!!");
-			computerScore = computerScore + 1;
-			TimeUnit.MILLISECONDS.sleep(70);
-			System.out.println("Computer Score: " + computerScore + "\nYour Score: " + yourScore);
-			TimeUnit.SECONDS.sleep(1);
-			main(args);
-
-			
-		} else if(winner.equalsIgnoreCase("You")) {
-			System.out.println("You Win!!");
-			yourScore = yourScore +1;
-			TimeUnit.MILLISECONDS.sleep(70);
-			System.out.println("Computer Score: " + computerScore + "\nYour Score: " + yourScore);
-			TimeUnit.SECONDS.sleep(1);
-			
-			main(args);
-
-
-		}else if(winner.equalsIgnoreCase("Tie")) {
-			System.out.println("Its a tie please try again");
-			TimeUnit.MILLISECONDS.sleep(70);
-			TimeUnit.SECONDS.sleep(1);
-			main(args);
-		}
 		
-		
-		
-		
-		
-		
-		
-		
+		GUIMakerClass.refresh();
 	}
 	
 	public static String generateComputerChoice( Random random ) {
@@ -81,21 +55,21 @@ public class RockPaperSicssors {
 		String userChoice = "";
 		
 	
-		for(int correct = 0; correct == 0;) {
+		for(Boolean correct = false; correct == false;) {
 		System.out.println("Please, Make your choice");
 		userChoice = scanner.nextLine(  );
 		if(userChoice.equalsIgnoreCase("rock")) {
 			userChoice = "rock";
-			correct = 1;
+			correct = true;
 		} else if(userChoice.equalsIgnoreCase("paper")) {
 			userChoice = "paper";
-			correct = 1;
+			correct = true;
 		}else if(userChoice.equalsIgnoreCase("Scissors")) {
 			userChoice = "scissors";
-			correct = 1;
+			correct = true;
 		}else {
 			System.out.println("Not an option");
-			correct = 0;
+			correct = false;
 		}
 	}
 		
