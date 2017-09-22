@@ -1,66 +1,49 @@
 package simpleRPS;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.Time;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
-
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.*;
-
 import audio.AudioMaster;
 import audio.Source;
 
-
-
 public class RockPaperSicssors {
-	
+
 	public static int yourScore = 0;
 	public static int computerScore = 0;
 	public static String userChoice = "";
 	public static String computerChoice;
 	public static String winner;
-	
 
-	
-	public static void main( String [] args) {
+	public static void main(String[] args) {
 		comp();
-		GUIMakerClass myGUI = new GUIMakerClass();		
+		GUIMakerClass myGUI = new GUIMakerClass();
 		myGUI.createGUI();
-		
+
 		AudioMaster.init();
 		AudioMaster.setListenerData();
-		
+
 		int buffer = AudioMaster.loadSound("audio/test.wav");
-		Source source = new Source();	
+		Source source = new Source();
 		source.play(buffer);
-		
-		
-		
 
 	}
-	
+
 	public static void comp() {
 		Random random = new Random();
 		computerChoice = generateComputerChoice(random);
-		
+
 		GUIMakerClass.refresh();
 	}
-	
-	public static String generateComputerChoice( Random random ) {
+
+	public static String generateComputerChoice(Random random) {
 		int wordNumber;
 		String computerChoice = "";
-		wordNumber = random.nextInt( 3 ) + 1; 
-		
-		if (wordNumber == 1 )  {
+		wordNumber = random.nextInt(3) + 1;
+
+		if (wordNumber == 1) {
 			computerChoice = "Rock";
-		}else if (wordNumber == 2 ){
+		} else if (wordNumber == 2) {
 			computerChoice = "Paper";
-		}else if (wordNumber == 3) {
+		} else if (wordNumber == 3) {
 			computerChoice = "Scissors";
 		}
 		System.out.println("The computer has made its choice");
@@ -68,88 +51,82 @@ public class RockPaperSicssors {
 	}
 
 	public static void showMenu() {
-		System.out.println( "1. Rock\n2. Paper\n3. Scissors" );
-	}
-	
-	public static String getUserChoice( Scanner scanner ) throws InterruptedException {
-		String userChoice = "";
-		
-	
-		for(Boolean correct = false; correct == false;) {
-		System.out.println("Please, Make your choice");
-		userChoice = scanner.nextLine(  );
-		if(userChoice.equalsIgnoreCase("rock")) {
-			userChoice = "rock";
-			correct = true;
-		} else if(userChoice.equalsIgnoreCase("paper")) {
-			userChoice = "paper";
-			correct = true;
-		}else if(userChoice.equalsIgnoreCase("Scissors")) {
-			userChoice = "scissors";
-			correct = true;
-		}else {
-			System.out.println("Not an option");
-			correct = false;
-		}
-	}
-		
-		
-		return userChoice;
-		
+		System.out.println("1. Rock\n2. Paper\n3. Scissors");
 	}
 
-	public static String winner( String computerChoice, String userChoice ) {
+	public static String getUserChoice(Scanner scanner) throws InterruptedException {
+		String userChoice = "";
+
+		for (Boolean correct = false; correct == false;) {
+			System.out.println("Please, Make your choice");
+			userChoice = scanner.nextLine();
+			if (userChoice.equalsIgnoreCase("rock")) {
+				userChoice = "rock";
+				correct = true;
+			} else if (userChoice.equalsIgnoreCase("paper")) {
+				userChoice = "paper";
+				correct = true;
+			} else if (userChoice.equalsIgnoreCase("Scissors")) {
+				userChoice = "scissors";
+				correct = true;
+			} else {
+				System.out.println("Not an option");
+				correct = false;
+			}
+		}
+
+		return userChoice;
+
+	}
+
+	public static String winner(String computerChoice, String userChoice) {
 		String winner = "No winner";
 		String customMessage = "";
 		String rock = "Rock Brakes Scissors";
 		String paper = "Paper Covers Rock";
 		String scissors = "Scissors Cut Paper";
 		String noWinner = "Its a tie!! Try again";
-		
-		if(computerChoice.equals("Rock") && userChoice.equalsIgnoreCase("scissors")) {
+
+		if (computerChoice.equals("Rock") && userChoice.equalsIgnoreCase("scissors")) {
 			winner = "Computer";
 			customMessage = rock;
-		} else if(computerChoice.equals("Scissors") && userChoice.equalsIgnoreCase("rock")) {
+		} else if (computerChoice.equals("Scissors") && userChoice.equalsIgnoreCase("rock")) {
 			winner = "You";
 			customMessage = rock;
 		}
-		
-		if(computerChoice.equals("Scissors") && userChoice.equalsIgnoreCase("paper")) {
+
+		if (computerChoice.equals("Scissors") && userChoice.equalsIgnoreCase("paper")) {
 			winner = "Computer";
 			customMessage = scissors;
-		} else if(computerChoice.equals("Paper") && userChoice.equalsIgnoreCase("scissors")) {
+		} else if (computerChoice.equals("Paper") && userChoice.equalsIgnoreCase("scissors")) {
 			winner = "You";
 			customMessage = scissors;
 		}
-		
-		if(computerChoice.equals("Paper") && userChoice.equalsIgnoreCase("rock")) {
+
+		if (computerChoice.equals("Paper") && userChoice.equalsIgnoreCase("rock")) {
 			winner = "Computer";
 			customMessage = paper;
-		} else if(computerChoice.equals("Rock") && userChoice.equalsIgnoreCase("paper")) {
+		} else if (computerChoice.equals("Rock") && userChoice.equalsIgnoreCase("paper")) {
 			winner = "You";
 			customMessage = paper;
 		}
-		
-		if(computerChoice.equals("Rock") && userChoice.equalsIgnoreCase("rock")) {
+
+		if (computerChoice.equals("Rock") && userChoice.equalsIgnoreCase("rock")) {
 			winner = "Tie";
 			customMessage = noWinner;
-		} 
-		
-		if(computerChoice.equals("Paper") && userChoice.equalsIgnoreCase("paper")) {
+		}
+
+		if (computerChoice.equals("Paper") && userChoice.equalsIgnoreCase("paper")) {
 			winner = "Tie";
 			customMessage = noWinner;
-		} 		
-		
-		if(computerChoice.equals("Scissors") && userChoice.equalsIgnoreCase("scissors")) {
+		}
+
+		if (computerChoice.equals("Scissors") && userChoice.equalsIgnoreCase("scissors")) {
 			winner = "Tie";
 			customMessage = noWinner;
-		} 		
+		}
 		return winner;
-	
+
+	}
 
 }
-	
-	
-}
-
-
