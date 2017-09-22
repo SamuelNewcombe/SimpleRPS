@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import audio.AudioMaster;
 import simpleRPS.RockPaperSicssors;
 
 public class GUIMakerClass {
@@ -32,6 +33,7 @@ public class GUIMakerClass {
 	static JLabel score = new JLabel();	
 	static JLabel score2 = new JLabel();
 	static JLabel score3 = new JLabel();
+	
 	
 	public void createGUI() {
 		Rock.setText("Rock");
@@ -62,7 +64,7 @@ public class GUIMakerClass {
 		myFrame.setSize(600,400);
 		myFrame.setLocationRelativeTo(null);
 		myFrame.setLayout(new GridLayout(3,5));
-		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
 		myFrame.setVisible(true);
 		score3.setForeground(Color.blue);
 		
@@ -120,7 +122,7 @@ public class GUIMakerClass {
 			
 			System.out.println("Computer Score: " + RockPaperSicssors.computerScore + "\nYour Score: " + RockPaperSicssors.yourScore);
 			
-			RockPaperSicssors.test();
+			RockPaperSicssors.comp();
 
 			
 		} else if(RockPaperSicssors.winner.equalsIgnoreCase("You")) {
@@ -131,7 +133,7 @@ public class GUIMakerClass {
 			RockPaperSicssors.yourScore = RockPaperSicssors.yourScore +1;
 				TimeUnit.MILLISECONDS.sleep(70);
 			System.out.println("Computer Score: " + RockPaperSicssors.computerScore + "\nYour Score: " + RockPaperSicssors.yourScore);
-			RockPaperSicssors.test();
+			RockPaperSicssors.comp();
 
 		}else if(RockPaperSicssors.winner.equalsIgnoreCase("Tie")) {
 			score3.setText("Its a tie");
@@ -140,7 +142,7 @@ public class GUIMakerClass {
 				TimeUnit.SECONDS.sleep(1);
 				TimeUnit.MILLISECONDS.sleep(70);
 				TimeUnit.SECONDS.sleep(1);	
-			RockPaperSicssors.test();
+			RockPaperSicssors.comp();
 			}
 		}
 	}
@@ -154,7 +156,9 @@ public class GUIMakerClass {
 		score2.repaint();
 
 	}
+	
 }
+
 		
 		
 		

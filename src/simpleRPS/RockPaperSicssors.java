@@ -1,10 +1,20 @@
 package simpleRPS;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Time;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
+
+import audio.AudioMaster;
+import audio.Source;
+
 
 
 public class RockPaperSicssors {
@@ -17,14 +27,24 @@ public class RockPaperSicssors {
 	
 
 	
-	public static void main( String [] args) throws InterruptedException {
-		test();
+	public static void main( String [] args) {
+		comp();
 		GUIMakerClass myGUI = new GUIMakerClass();		
 		myGUI.createGUI();
 		
+		AudioMaster.init();
+		AudioMaster.setListenerData();
+		
+		int buffer = AudioMaster.loadSound("audio/test.wav");
+		Source source = new Source();	
+		source.play(buffer);
+		
+		
+		
+
 	}
 	
-	public static void test() {
+	public static void comp() {
 		Random random = new Random();
 		computerChoice = generateComputerChoice(random);
 		
@@ -77,7 +97,7 @@ public class RockPaperSicssors {
 		return userChoice;
 		
 	}
-	
+
 	public static String winner( String computerChoice, String userChoice ) {
 		String winner = "No winner";
 		String customMessage = "";
@@ -125,5 +145,11 @@ public class RockPaperSicssors {
 			customMessage = noWinner;
 		} 		
 		return winner;
-	}
+	
+
 }
+	
+	
+}
+
+
